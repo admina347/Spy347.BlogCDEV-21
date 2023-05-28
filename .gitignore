@@ -1,0 +1,7 @@
+/.vscode/
+/Spy347.BlogCDEV-21.Infrastructure/obj/
+/Spy347.BlogCDEV-21.Infrastructure/bin/
+/Spy347.BlogCDEV-21.Web/obj/
+/Spy347.BlogCDEV-21.Web/bin/
+*.csproj
+*.json
