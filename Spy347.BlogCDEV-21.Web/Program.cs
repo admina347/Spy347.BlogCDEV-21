@@ -1,7 +1,26 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Spy347.BlogCDEV_21.Infrastructure;
+using Spy347.BlogCDEV_21.Infrastructure.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//Db
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+  options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+
+//Identity password settings
+builder.Services.AddIdentity<User, IdentityRole>(opts => {
+  opts.Password.RequiredLength = 5;   
+  opts.Password.RequireNonAlphanumeric = false;  
+  opts.Password.RequireLowercase = false; 
+  opts.Password.RequireUppercase = false; 
+  opts.Password.RequireDigit = false;
+  })
+  .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 
