@@ -14,9 +14,7 @@ builder.Services.AddControllersWithViews();
 //Db
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-//UoW add Repositories
-builder.Services.AddUnitOfWork()
-.AddCustomRepository <Post, PostRepository>();
+
 
 //Identity password settings
 builder.Services.AddIdentity<User, IdentityRole>(opts => {

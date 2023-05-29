@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
 
 namespace Spy347.BlogCDEV_21.Web.ViewModels
@@ -6,15 +7,22 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Поле Заголовок обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Заголовок", Prompt = "Заголовок")]
         public string Title { get; set; }
+
+        [Required(ErrorMessage = "Поле Описание обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Описание", Prompt = "Описание")]
         public string Text { get; set; }
 
-        public int? AuthorId { get; set; }
-        //navigation properties
-        public User Author { get; set; }
+        [Required(ErrorMessage = "Поле Автор обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Автор", Prompt = "Автор")]
 
-        // Навигационное свойство
-        public int PostId { get; set; }
-        public List<Post> Posts { get; set; }
+        public int AuthorId { get; set; }
+        public int PostId { get; set; }     
+           
     }
 }

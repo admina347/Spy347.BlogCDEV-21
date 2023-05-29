@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Spy347.BlogCDEV_21.Infrastructure.Data.UoW;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
+using Spy347.BlogCDEV_21.Infrastructure.Repositories;
 using Spy347.BlogCDEV_21.Web.Extentions;
+using Spy347.BlogCDEV_21.Web.ViewModels;
 using Spy347.BlogCDEV_21.Web.ViewModels.Account;
 
 namespace AwesomeNetwork.Controllers.Account
@@ -181,7 +183,27 @@ namespace AwesomeNetwork.Controllers.Account
                 ModelState.AddModelError("", "Некорректные данные");
                 return View("Edit", model);
             }
+            
         }
+        public async Task<IActionResult> NewMessage(string id, PostViewModel post)
+        {
+            var currentuser = User;
+
+            var result = await _userManager.GetUserAsync(currentuser);
+            var friend = await _userManager.FindByIdAsync(id);
+
+            var repository = _unitOfWork.GetRepository<Post>() as PostRepository;
+
+            var item = new Post()
+            {
+                Title = post.Title,
+                Text = post.Text
+            };
+            repository.Create(item);
+
+      
+            return View("Chat", model);
+        } 
         /* //search
         [Route("UserList")]
         [HttpPost]

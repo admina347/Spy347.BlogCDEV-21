@@ -9,9 +9,9 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime CreatedData { get; set; } = DateTime.Now;
-        public DateTime BirthDate { get; set; }
 
-        public string Image { get; set; }
+        public List<Post> Posts { get; set; } = new List<Post>();
+        public List<Role> Roles { get; set; } = new List<Role>();
 
     }
 }
