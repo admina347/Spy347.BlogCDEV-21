@@ -8,7 +8,7 @@ using Spy347.BlogCDEV_21.Web.ViewModels.Account;
 
 namespace Spy347.BlogCDEV_21.Web.BLL.Services
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -100,8 +100,8 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
                 user.UserName = model.UserName;
             }
 
-           foreach (var role in model.Roles)
-           {
+            foreach (var role in model.Roles)
+            {
                 var roleName = _roleManager.FindByIdAsync(role.Id.ToString()).Result.Name;
 
                 if (role.IsSelected)
@@ -112,7 +112,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
                 {
                     await _userManager.RemoveFromRoleAsync(user, roleName);
                 }
-           }
+            }
 
             var result = await _userManager.UpdateAsync(user);
             return result;

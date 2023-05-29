@@ -6,7 +6,7 @@ using Spy347.BlogCDEV_21.Web.ViewModels;
 
 namespace Spy347.BlogCDEV_21.Web.BLL.Services
 {
-    public class CommentService
+    public class CommentService : ICommentService
     {
         public IMapper _mapper;
         private ICommentRepository _commentRepository;

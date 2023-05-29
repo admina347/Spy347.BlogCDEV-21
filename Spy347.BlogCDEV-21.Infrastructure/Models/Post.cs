@@ -10,6 +10,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Models
         [MaxLength(100)]
         public string Title { get; set; }
         public string Text { get; set; }
+        public string AuthorId { get; set; }
 
         public DateTime CreatedData { get; set; }
 

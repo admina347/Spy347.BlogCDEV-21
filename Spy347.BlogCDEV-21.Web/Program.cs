@@ -5,7 +5,7 @@ using Spy347.BlogCDEV_21.Infrastructure;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
 using Spy347.BlogCDEV_21.Infrastructure.Repositories;
 using Spy347.BlogCDEV_21.Web.BLL;
-using Spy347.BlogCDEV_21.Web.Extentions;
+using Spy347.BlogCDEV_21.Web.BLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +25,18 @@ builder.Services.AddIdentity<User, IdentityRole>(opts => {
   opts.Password.RequireDigit = false;
   })
   .AddEntityFrameworkStores<ApplicationDbContext>();
+
+//Register Services
+builder.Services
+  .AddTransient<ICommentRepository, CommentRepository>()
+  .AddTransient<ITagRepository, TagRepository>()
+  .AddTransient<IPostRepository, PostRepository>()
+  .AddTransient<IAccountService, AccountService>()
+  .AddTransient<ICommentService, CommentService>()
+  .AddTransient<IHomeService, HomeService>()
+  .AddTransient<IPostService, PostService>()
+  .AddTransient<ITagService, TagService>()
+  .AddTransient<IRoleService, RoleService>();
 
 // Подключаем автомаппинг
 var mapperConfig = new MapperConfiguration((v) => 
