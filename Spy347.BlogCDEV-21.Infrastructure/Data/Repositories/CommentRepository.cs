@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Spy347.BlogCDEV_21.Infrastructure.Data.Repository;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
 
 namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
 {
 
-    public class CommentRepository : ICommentRepository
+    public class CommentRepository : Repository<Comment>
     {
-        private ApplicationDbContext _context;
-
-        public CommentRepository(ApplicationDbContext context)
+        public CommentRepository(ApplicationDbContext db) : base(db)
         {
-            _context = context;
+           
         }
 
-        public List<Comment> GetAllComments()
+        /* public List<Comment> GetAllComments()
         {
-            return _context.Comments.ToList();
+            var comments = Set.AsEnumerable
+            //return _context.Comments.ToList();
         }
 
         public Comment GetComment(int id)
@@ -56,6 +52,6 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
                 return true;
             }
             return false;
-        }
+        } */
     }
 }

@@ -1,7 +1,11 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Spy347.BlogCDEV_21.Infrastructure;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
+using Spy347.BlogCDEV_21.Infrastructure.Repositories;
+using Spy347.BlogCDEV_21.Web.BLL;
+using Spy347.BlogCDEV_21.Web.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +14,9 @@ builder.Services.AddControllersWithViews();
 //Db
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-
+//UoW add Repositories
+builder.Services.AddUnitOfWork()
+.AddCustomRepository <Post, PostRepository>();
 
 //Identity password settings
 builder.Services.AddIdentity<User, IdentityRole>(opts => {
@@ -21,6 +27,13 @@ builder.Services.AddIdentity<User, IdentityRole>(opts => {
   opts.Password.RequireDigit = false;
   })
   .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Подключаем автомаппинг
+var mapperConfig = new MapperConfiguration((v) => 
+{
+    v.AddProfile(new MappingProfile());
+}
+);
 
 var app = builder.Build();
 

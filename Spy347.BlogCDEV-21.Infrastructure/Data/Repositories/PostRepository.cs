@@ -1,19 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using Spy347.BlogCDEV_21.Infrastructure.Data.Repository;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
 
 namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
 {
 
-    public class PostRepository : IPostRepository
+    public class PostRepository : Repository<Post>
     {
-        private ApplicationDbContext _context;
-
-        public PostRepository(ApplicationDbContext context)
+        public PostRepository(ApplicationDbContext db) : base(db)
         {
-            _context = context;
+
         }
 
-        public List<Post> GetAllPosts()
+        public IEnumerable<Post> GetAllPosts()
+        {
+             return GetAll();
+        }
+
+        /* public List<Post> GetAllPosts()
         {
             return _context.Posts.Include(p => p.Tags).ToList();
         }
@@ -52,6 +56,6 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
                 return true;
             }
             return false;
-        }
+        } */
     }
 }
