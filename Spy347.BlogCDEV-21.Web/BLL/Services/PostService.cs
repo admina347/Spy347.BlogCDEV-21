@@ -39,7 +39,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return model;
         }
 
-        public async Task<int> CreatePost(PostViewModel model)
+        public async Task<Guid> CreatePost(PostViewModel model)
         {
             var dbTags = new List<Tag>();
 
@@ -68,7 +68,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return post.Id;
         }
 
-        public async Task<PostViewModel> EditPost(int id)
+        public async Task<PostViewModel> EditPost(Guid id)
         {
             var post = _postRepository.GetPost(id);
 
@@ -97,7 +97,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return model;
         }
 
-        public async Task EditPost(PostViewModel model, int id)
+        public async Task EditPost(PostViewModel model, Guid id)
         {
             var post = _postRepository.GetPost(id);
 
@@ -120,7 +120,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             await _postRepository.UpdatePost(post);
         }
 
-        public async Task RemovePost(int id)
+        public async Task RemovePost(Guid id)
         {
             await _postRepository.RemovePost(id);
         }
@@ -132,7 +132,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return posts;
         }
 
-        public async Task<Post> ShowPost(int id)
+        public async Task<Post> ShowPost(Guid id)
         {
             var post = _postRepository.GetPost(id);
             var user = await _userManager.FindByIdAsync(post.AuthorId.ToString());

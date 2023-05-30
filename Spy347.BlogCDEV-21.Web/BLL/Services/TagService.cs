@@ -7,19 +7,19 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
 {
     public class TagService : ITagService
     {
-        private readonly ITagRepository _repo;
+        private readonly ITagRepository _tagRepository;
         private IMapper _mapper;
 
-        public TagService(ITagRepository repo, IMapper mapper)
+        public TagService(ITagRepository tagRepository, IMapper mapper)
         {
-            _repo = repo;
+            _tagRepository = tagRepository;
             _mapper = mapper;
         }
 
-        public async Task<int> CreateTag(TagViewModel model)
+        public async Task<Guid> CreateTag(TagViewModel model)
         {
             var tag = _mapper.Map<Tag>(model);
-            await _repo.AddTag(tag);
+            await _tagRepository.AddTag(tag);
 
             return tag.Id;
         }
@@ -29,19 +29,19 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             if (string.IsNullOrEmpty(model.Name))
                 return;
 
-            var tag = _repo.GetTag(model.Id);
+            var tag = _tagRepository.GetTag(model.Id);
             tag.Name = model.Name;
-            await _repo.UpdateTag(tag);
+            await _tagRepository.UpdateTag(tag);
         }
 
-        public async Task RemoveTag(int id)
+        public async Task RemoveTag(Guid id)
         {
-            await _repo.RemoveTag(id);
+            await _tagRepository.RemoveTag(id);
         }
 
         public async Task<List<Tag>> GetTags()
         {
-            return _repo.GetAllTags().ToList();
+            return _tagRepository.GetAllTags().ToList();
         }
     }
 }

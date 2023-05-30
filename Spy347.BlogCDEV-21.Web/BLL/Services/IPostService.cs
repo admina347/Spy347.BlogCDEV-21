@@ -6,11 +6,11 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
     public interface IPostService
     {
         Task<PostViewModel> CreatePost();
-        Task<int> CreatePost(PostViewModel model);
-        Task<PostViewModel> EditPost(int id);
-        Task EditPost(PostViewModel model, int id);
+        Task<Guid> CreatePost(PostViewModel model);
+        Task<PostViewModel> EditPost(Guid id);
+        Task EditPost(PostViewModel model, Guid id);
         Task<List<Post>> GetPosts();
-        Task RemovePost(int id);
-        Task<Post> ShowPost(int id);
+        Task RemovePost(Guid id);
+        Task<Post> ShowPost(Guid id);
     }
 }

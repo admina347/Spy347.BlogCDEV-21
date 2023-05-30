@@ -5,7 +5,7 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels
 {
     public class CommentViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Поле Заголовок обязательно для заполнения")]
         [DataType(DataType.Text)]
@@ -21,8 +21,8 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels
         [DataType(DataType.Text)]
         [Display(Name = "Автор", Prompt = "Автор")]
 
-        public int AuthorId { get; set; }
-        public int PostId { get; set; }     
+        public Guid AuthorId { get; set; }
+        public Guid PostId { get; set; }     
            
     }
 }

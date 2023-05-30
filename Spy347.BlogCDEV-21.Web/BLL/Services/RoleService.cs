@@ -39,7 +39,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             await _roleManager.UpdateAsync(role);
         }
 
-        public async Task RemoveRole(int id)
+        public async Task RemoveRole(Guid id)
         {
             var role = await _roleManager.FindByIdAsync(id.ToString());
             await _roleManager.DeleteAsync(role);

@@ -69,7 +69,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
                 Email = user.Email,
                 NewPassword = string.Empty,
                 Id = id,
-                Roles = allRolesName.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name }).ToList(),
+                Roles = allRolesName.Select(r => new RoleViewModel() { Id = new Guid(r.Id), Name = r.Name }).ToList(),
             };
 
             return model;

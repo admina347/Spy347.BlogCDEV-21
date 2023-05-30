@@ -5,17 +5,17 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Models
     public class Comment
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string Title { get; set; }
         public string Text { get; set; }
 
-        public int? AuthorId { get; set; }
+        public Guid AuthorId { get; set; }
         //navigation properties
         public User Author { get; set; }
 
         // Навигационное свойство
-        public int PostId { get; set; }
+        public Guid PostId { get; set; }
         public List<Post> Posts { get; set; }
     }
 }

@@ -5,9 +5,9 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
 {
     public interface ICommentService
     {
-        Task<int> CreateComment(CommentViewModel model, int UserId);
+        Task<Guid> CreateComment(CommentViewModel model, Guid UserId);
         Task EditComment(CommentViewModel model);
         Task<List<Comment>> GetComments();
-        Task RemoveComment(int id);
+        Task RemoveComment(Guid id);
     }
 }

@@ -17,7 +17,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             return _context.Posts.Include(p => p.Tags).ToList();
         }
 
-        public Post GetPost(int id)
+        public Post GetPost(Guid id)
         {
             return _context.Posts.Include(p => p.Tags).FirstOrDefault(p => p.Id == id);
         }
@@ -34,7 +34,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             await SaveChangesAsync();
         }
 
-        public async Task RemovePost(int id)
+        public async Task RemovePost(Guid id)
         {
             var post = GetPost(id);
             if (post != null)

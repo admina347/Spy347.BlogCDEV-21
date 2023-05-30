@@ -19,7 +19,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             _userManager = userManager;
         }
 
-        public async Task<int> CreateComment(CommentViewModel model, int UserId)
+        public async Task<Guid> CreateComment(CommentViewModel model, Guid userId)
         {
             Comment comment = new Comment
             {
@@ -27,7 +27,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
                 Text = model.Text,
                 //Author = model.Author,
                 PostId = model.PostId,
-                AuthorId = UserId,
+                AuthorId = userId,
                 //realAuthorName = _userManager.FindByIdAsync(UserId.ToString()).Result.UserName,
             };
 
@@ -46,7 +46,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             await _commentRepository.UpdateComment(comment);
         }
 
-        public async Task RemoveComment(int id)
+        public async Task RemoveComment(Guid id)
         {
             await _commentRepository.RemoveComment(id);
         }

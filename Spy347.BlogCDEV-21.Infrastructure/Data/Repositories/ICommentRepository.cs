@@ -6,9 +6,9 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
     {
         Task AddComment(Comment comment);
         List<Comment> GetAllComments();
-        Comment GetComment(int id);
-        List<Comment> GetCommentsByPostId(int id);
-        Task RemoveComment(int id);
+        Comment GetComment(Guid id);
+        List<Comment> GetCommentsByPostId(Guid id);
+        Task RemoveComment(Guid id);
         Task<bool> SaveChangesAsync();
         Task UpdateComment(Comment comment);
     }

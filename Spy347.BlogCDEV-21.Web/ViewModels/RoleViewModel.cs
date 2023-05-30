@@ -4,7 +4,7 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels
 {
     public class RoleViewModel
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Поле Название обязательно для заполнения")]
         [DataType(DataType.Text)]

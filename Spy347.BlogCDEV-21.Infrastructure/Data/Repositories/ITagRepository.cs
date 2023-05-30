@@ -6,8 +6,8 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
     {
         Task AddTag(Tag tag);
         HashSet<Tag> GetAllTags();
-        Tag GetTag(int id);
-        Task RemoveTag(int id);
+        Tag GetTag(Guid id);
+        Task RemoveTag(Guid id);
         Task<bool> SaveChangesAsync();
         Task UpdateTag(Tag tag);
     }

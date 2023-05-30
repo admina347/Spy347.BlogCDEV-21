@@ -16,7 +16,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             return _context.Tags.ToHashSet();
         }
 
-        public Tag GetTag(int id)
+        public Tag GetTag(Guid id)
         {
             return _context.Tags.FirstOrDefault(t => t.Id == id);
         }
@@ -33,7 +33,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             await SaveChangesAsync();
         }
 
-        public async Task RemoveTag(int id)
+        public async Task RemoveTag(Guid id)
         {
             _context.Tags.Remove(GetTag(id));
             await SaveChangesAsync();

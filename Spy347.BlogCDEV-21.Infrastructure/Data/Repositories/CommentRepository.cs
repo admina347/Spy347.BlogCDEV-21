@@ -16,12 +16,12 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             return _context.Comments.ToList();
         }
 
-        public Comment GetComment(int id)
+        public Comment GetComment(Guid id)
         {
             return _context.Comments.FirstOrDefault(c => c.Id == id);
         }
 
-        public List<Comment> GetCommentsByPostId(int id)
+        public List<Comment> GetCommentsByPostId(Guid id)
         {
             return _context.Comments.Where(c => c.PostId == id).ToList();
         }
@@ -38,7 +38,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             await SaveChangesAsync();
         }
 
-        public async Task RemoveComment(int id)
+        public async Task RemoveComment(Guid id)
         {
             _context.Comments.Remove(GetComment(id));
             await SaveChangesAsync();

@@ -6,8 +6,8 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
     {
         Task AddPost(Post post);
         List<Post> GetAllPosts();
-        Post GetPost(int id);
-        Task RemovePost(int id);
+        Post GetPost(Guid id);
+        Task RemovePost(Guid id);
         Task<bool> SaveChangesAsync();
         Task UpdatePost(Post post);
     }

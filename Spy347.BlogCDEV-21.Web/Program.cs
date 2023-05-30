@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 //Identity password settings
-builder.Services.AddIdentity<User, IdentityRole>(opts => {
+builder.Services.AddIdentity<User, Role>(opts => {
   opts.Password.RequiredLength = 5;   
   opts.Password.RequireNonAlphanumeric = false;  
   opts.Password.RequireLowercase = false; 
@@ -44,6 +44,9 @@ var mapperConfig = new MapperConfiguration((v) =>
     v.AddProfile(new MappingProfile());
 }
 );
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+
 
 var app = builder.Build();
 
