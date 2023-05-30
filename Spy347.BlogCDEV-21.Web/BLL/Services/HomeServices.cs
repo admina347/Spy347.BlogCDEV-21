@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
@@ -25,9 +21,9 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
 
         public async Task GenerateData()
         {
-            var testUser = new RegisterViewModel { UserName = "Test", Email = "Test@gmail.com", Password = "1234aB", FirstName = "Test", LastName = "Testov" };
-            var testUser2 = new RegisterViewModel { UserName = "Test2", Email = "Test2@gmail.com", Password = "12342aB", FirstName = "Test2", LastName = "Testov2" };
-            var testUser3 = new RegisterViewModel { UserName = "Test3", Email = "Test3@gmail.com", Password = "12343aB", FirstName = "Test3", LastName = "Testov3" };
+            var testUser = new RegisterViewModel { UserName = "User1", Email = "User1@mail.ru", Password = "123456qwerty", FirstName = "Test1", LastName = "Testov1" };
+            var testUser2 = new RegisterViewModel { UserName = "User2", Email = "User2@mail.ru", Password = "1234qwer", FirstName = "Test2", LastName = "Testov2" };
+            var testUser3 = new RegisterViewModel { UserName = "User3", Email = "User3@mail.ru", Password = "98765qwer", FirstName = "Test3", LastName = "Testov3" };
 
             var user = _mapper.Map<User>(testUser);
             var user1 = _mapper.Map<User>(testUser2);

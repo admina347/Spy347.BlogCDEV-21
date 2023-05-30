@@ -31,7 +31,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        //await _homeService.GenerateData();
+        await _homeService.GenerateData();
 
         return View(new MainViewModel());
     }

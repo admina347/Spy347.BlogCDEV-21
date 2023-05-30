@@ -12,7 +12,7 @@ using Spy347.BlogCDEV_21.Infrastructure;
 namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230528104705_initial")]
+    [Migration("20230530084812_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -27,11 +27,11 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 
             modelBuilder.Entity("CommentPost", b =>
                 {
-                    b.Property<int>("CommentsId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CommentsId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PostsId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PostsId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CommentsId", "PostsId");
 
@@ -47,6 +47,10 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -65,6 +69,10 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -175,11 +183,11 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 
             modelBuilder.Entity("PostTag", b =>
                 {
-                    b.Property<int>("PostsId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PostsId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("TagsId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PostsId", "TagsId");
 
@@ -190,20 +198,18 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 
             modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Comment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AuthorId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AuthorId1")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -222,11 +228,13 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 
             modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Post", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedData")
                         .HasColumnType("datetime2");
@@ -240,8 +248,8 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
@@ -255,11 +263,9 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 
             modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Tag", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -344,6 +350,21 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Role", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.Property<int?>("SecurityLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("UserId");
+
+                    b.HasDiscriminator().HasValue("Role");
                 });
 
             modelBuilder.Entity("CommentPost", b =>
@@ -439,10 +460,24 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
             modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Post", b =>
                 {
                     b.HasOne("Spy347.BlogCDEV_21.Infrastructure.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("UserId1");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Role", b =>
+                {
+                    b.HasOne("Spy347.BlogCDEV_21.Infrastructure.Models.User", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.User", b =>
+                {
+                    b.Navigation("Posts");
+
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }
