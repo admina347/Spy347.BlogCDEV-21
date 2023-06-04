@@ -41,9 +41,9 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             await _roleManager.CreateAsync(moderRole);
             await _roleManager.CreateAsync(adminRole);
 
-            await _userManager.AddToRoleAsync(user, userRole.Name);
+            await _userManager.AddToRoleAsync(user, adminRole.Name);
             await _userManager.AddToRoleAsync(user1, moderRole.Name);
-            await _userManager.AddToRoleAsync(user2, adminRole.Name);
+            await _userManager.AddToRoleAsync(user2, userRole.Name);
         }
     }
 }

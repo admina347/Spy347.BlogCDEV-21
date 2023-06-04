@@ -23,7 +23,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         {
             Comment comment = new Comment
             {
-                Title = model.Title,
+                //Title = model.Title,
                 Text = model.Text,
                 //Author = model.Author,
                 PostId = model.PostId,
@@ -39,7 +39,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         {
             var comment = _commentRepository.GetComment(model.Id);
 
-            comment.Title = model.Title;
+            //comment.Title = model.Title;
             comment.Text = model.Text;
             //comment.Author = model.Author;
 

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
 
 namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
@@ -23,7 +24,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
 
         public List<Comment> GetCommentsByPostId(Guid id)
         {
-            return _context.Comments.Where(c => c.PostId == id).ToList();
+            return _context.Comments.Include(a => a.Author).Where(c => c.PostId == id).ToList();
         }
 
         public async Task AddComment(Comment comment)

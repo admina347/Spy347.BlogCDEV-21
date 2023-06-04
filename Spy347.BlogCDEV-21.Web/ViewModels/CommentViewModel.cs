@@ -17,7 +17,7 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels
         [Display(Name = "Описание", Prompt = "Описание")]
         public string Text { get; set; }
 
-
+        public string AuthorEmail { get; set;}
         public Guid AuthorId { get; set; }
         public Guid PostId { get; set; }     
            

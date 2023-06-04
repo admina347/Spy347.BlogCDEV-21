@@ -19,7 +19,8 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
 
         public Post GetPost(Guid id)
         {
-            return _context.Posts.Include(p => p.Tags).FirstOrDefault(p => p.Id == id);
+            return _context.Posts.Include(p => p.Tags).Include(c => c.Comments).ThenInclude(c => c.Author).Include(u => u.User).FirstOrDefault(p => p.Id == id);
+            //.ThenInclude(c => c.Author) - not work
         }
 
         public async Task AddPost(Post post)

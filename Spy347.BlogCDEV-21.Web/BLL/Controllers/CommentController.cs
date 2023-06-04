@@ -31,8 +31,8 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Get] добавление комментария
         /// </summary>
         [HttpGet]
-        [Route("Comment/Add")]
-        public IActionResult CreateComment(Guid postId)
+        [Route("Add")]
+        public IActionResult AddComment(Guid postId)
         {
             var model = new CommentViewModel() { PostId = postId };
             return View(model);
@@ -42,8 +42,8 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Post] добавление комментария
         /// </summary>
         [HttpPost]
-        [Route("Comment/Add")]
-        public async Task<IActionResult> CreateComment(CommentViewModel model, Guid postId)
+        [Route("Add")]
+        public async Task<IActionResult> AddComment(CommentViewModel model, Guid postId)
         {
             model.PostId = postId;
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -54,7 +54,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] редактирования коментария
         /// </summary>
-        [Route("Comment/Edit")]
+        [Route("Edit")]
         [HttpGet]
         public IActionResult EditComment(Guid id)
         {
@@ -66,7 +66,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Post] редактирования коментария
         /// </summary>
         [Authorize]
-        [Route("Comment/Edit")]
+        [Route("Edit")]
         [HttpPost]
         public async Task<IActionResult> EditComment(CommentViewModel model)
         {
@@ -86,7 +86,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Get] удаления коментария
         /// </summary>
         [HttpGet]
-        [Route("Comment/Remove")]
+        [Route("Remove")]
         public async Task<IActionResult> RemoveComment(Guid id, bool confirm = true)
         {
             if (confirm)
@@ -98,7 +98,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Delete] удаления коментария
         /// </summary>
         [HttpDelete]
-        [Route("Comment/Remove")]
+        [Route("Remove")]
         public async Task<IActionResult> RemoveComment(Guid id)
         {
             await _commentService.RemoveComment(id);

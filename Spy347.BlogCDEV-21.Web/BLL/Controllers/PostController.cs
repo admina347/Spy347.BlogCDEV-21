@@ -71,7 +71,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             }
 
             var postId = await _postService.CreatePost(model);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Post");
         }
 
         /// <summary>

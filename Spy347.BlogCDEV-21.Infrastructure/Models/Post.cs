@@ -17,7 +17,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Models
         public Guid UserId { get; set; }
         //navigation properties
         public User User { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; } = new List<Comment>();
         public List<Tag> Tags { get; set; }
         
     }

@@ -22,21 +22,6 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CommentPost", b =>
-                {
-                    b.Property<Guid>("CommentsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PostsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CommentsId", "PostsId");
-
-                    b.HasIndex("PostsId");
-
-                    b.ToTable("CommentPost");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -212,13 +197,11 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId1");
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
@@ -364,21 +347,6 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("Role");
                 });
 
-            modelBuilder.Entity("CommentPost", b =>
-                {
-                    b.HasOne("Spy347.BlogCDEV_21.Infrastructure.Models.Comment", null)
-                        .WithMany()
-                        .HasForeignKey("CommentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Spy347.BlogCDEV_21.Infrastructure.Models.Post", null)
-                        .WithMany()
-                        .HasForeignKey("PostsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -451,7 +419,15 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("AuthorId1");
 
+                    b.HasOne("Spy347.BlogCDEV_21.Infrastructure.Models.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Author");
+
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Post", b =>
@@ -468,6 +444,11 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                     b.HasOne("Spy347.BlogCDEV_21.Infrastructure.Models.User", null)
                         .WithMany("Roles")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Post", b =>
+                {
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.User", b =>

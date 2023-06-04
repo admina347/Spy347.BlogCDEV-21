@@ -14,6 +14,9 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         private readonly ICommentRepository _commentRepo;
         private IMapper _mapper;
 
+        CommentViewModel commentViewModel = new CommentViewModel();
+
+
         public PostService(ITagRepository tagRepository, IPostRepository postRepository, IMapper mapper, UserManager<User> userManager, ICommentRepository commentRepo)
         {
             _postRepository = postRepository;
@@ -135,29 +138,40 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         public async Task<Post> ShowPost(Guid id)
         {
             var post = _postRepository.GetPost(id);
-            var user = await _userManager.FindByIdAsync(post.AuthorId.ToString());
+            //var user = await _userManager.FindByIdAsync(post.AuthorId.ToString());
+            //var author = _userManager.FindByIdAsync(post.AuthorId.ToString());
+            //var comments = _commentRepo.GetCommentsByPostId(post.Id);
+            //post.Id = id;
+            
 
-            var comments = _commentRepo.GetCommentsByPostId(post.Id);
-            post.Id = id;
-
-            foreach (var comment in comments)
+            /* foreach (var comment in post.Comments)
             {
                 if (post.Comments.FirstOrDefault(c => c.Id == comment.Id) == null)
                 {
                     post.Comments.Add(comment);
                 }
-            }
+            } */
+            /* Console.WriteLine("Comments:" + post.Comments.Count());
+            for (int i = 1; i < post.Comments.Count(); i++)
+            {
+                var author = await _userManager.FindByIdAsync(post.Comments[i].AuthorId.ToString());
+                if (author != null)
+                post.Comments[i].Author.Email = "test";         //author.Email;
+                Console.WriteLine("Comment - " + i);
+            } */
 
-            if (!string.IsNullOrEmpty(user.UserName))
+            /* if (!string.IsNullOrEmpty(user.UserName))
             {
                 post.AuthorId = user.UserName;
             }
             else
             {
                 post.AuthorId = "nonUsernamed";
-            }
+            } */
 
             return post;
         }
+
+        
     }
 }
