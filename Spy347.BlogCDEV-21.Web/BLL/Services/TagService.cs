@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
 using Spy347.BlogCDEV_21.Infrastructure.Repositories;
 using Spy347.BlogCDEV_21.Web.ViewModels;
@@ -7,6 +8,8 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
 {
     public class TagService : ITagService
     {
+        [BindProperty]
+        public TagViewModel TagViewModel { get; set; }
         private readonly ITagRepository _tagRepository;
         private IMapper _mapper;
 
@@ -16,7 +19,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateTag(TagViewModel model)
+        public async Task<Guid> AddTag(TagViewModel model)
         {
             var tag = _mapper.Map<Tag>(model);
             await _tagRepository.AddTag(tag);
@@ -33,6 +36,19 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             tag.Name = model.Name;
             await _tagRepository.UpdateTag(tag);
         }
+        public async Task<TagViewModel> EditTag(Guid id)
+        {
+            var tag = _tagRepository.GetTag(id);
+
+            var model = new TagViewModel()
+            {
+                Id = id,
+                Name = tag.Name
+            };
+
+            return model;
+        }
+
 
         public async Task RemoveTag(Guid id)
         {

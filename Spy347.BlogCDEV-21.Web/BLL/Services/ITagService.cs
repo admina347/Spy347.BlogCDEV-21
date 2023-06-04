@@ -5,8 +5,9 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
 {
     public interface ITagService
     {
-        Task<Guid> CreateTag(TagViewModel model);
+        Task<Guid> AddTag(TagViewModel model);
         Task EditTag(TagViewModel model);
+        Task<TagViewModel> EditTag(Guid id);
         Task<List<Tag>> GetTags();
         Task RemoveTag(Guid id);
     }

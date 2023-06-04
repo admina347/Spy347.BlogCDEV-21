@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
 
 namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
@@ -13,7 +14,8 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
 
         public HashSet<Tag> GetAllTags()
         {
-            return _context.Tags.ToHashSet();
+            //return _context.Tags.ToHashSet();
+            return _context.Tags.Include(p => p.Posts).ToHashSet();
         }
 
         public Tag GetTag(Guid id)

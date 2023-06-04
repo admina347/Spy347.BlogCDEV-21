@@ -1,0 +1,35 @@
+@using Spy347.BlogCDEV_21.Infrastructure.Models
+@model List<Tag>
+
+@{
+  @if (Model.Count() == 0)
+  {
+    <h5 class="card-title">Нет тегов</h5>
+    <h6 class="card-title"><a method="get" asp-controller="Tag" asp-action="AddTag">Добавить тег</a></h6>
+  }
+  else
+  {
+    <h5 class="card-title">Все теги</h5>
+    <h6 class="card-title"><a method="get" asp-controller="Tag" asp-action="AddTag">Добавить тег</a></h6>
+    foreach (var tag in Model)
+    {
+      <div class="card w-75">
+        <div class="card-body">
+          <h5 class="card-title">@tag.Name</h5>
+          @if (User.IsInRole("Администратор"))
+          {
+            <div>
+              <a class="btn btn-outline-info button" method="get" asp-controller="Tag" asp-action="EditTag"
+                asp-route-id="@tag.Id">Редактировать</a>
+              <a class="btn btn-outline-danger button" method="post" asp-controller="Tag" asp-action="RemoveTag"
+                asp-route-id="@tag.Id">Удалить</a>
+            </div>
+          }
+          <div class="text-right">
+            <p class="text-right text-dark">Статей по тегу: @tag.Posts.Count()</p>
+          </div>
+        </div>
+      </div>
+    }
+  }
+}

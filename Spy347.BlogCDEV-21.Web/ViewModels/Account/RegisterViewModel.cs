@@ -31,7 +31,7 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels.Account
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Обязательно подтвердите пароль")]
-        [Compare("PasswordReg", ErrorMessage = "Пароли не совпадают")]
+        [Compare("PasswordConfirm", ErrorMessage = "Пароли не совпадают")]
         [DataType(DataType.Password)]
         [Display(Name = "Подтвердить пароль", Prompt = "Введите пароль повторно")]
         public string PasswordConfirm { get; set; }

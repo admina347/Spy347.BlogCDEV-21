@@ -32,7 +32,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] показ поста
         /// </summary>
-        [Route("Post/Show")]
+        [Route("Show")]
         [HttpGet]
         public async Task<IActionResult> ShowPost(Guid id)
         {
@@ -43,10 +43,10 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] создания поста
         /// </summary>
-        [Route("Post/Add")]
+        [Route("Add")]
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> CreatePost()
+        public async Task<IActionResult> AddPost()
         {
             var model = await _postService.CreatePost();
 
@@ -56,10 +56,10 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Post] создания поста
         /// </summary>
-        [Route("Post/Add")]
+        [Route("Add")]
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreatePost(PostViewModel model)
+        public async Task<IActionResult> AddPost(PostViewModel model)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             model.AuthorId = user.Id;
@@ -77,7 +77,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] редактирования поста
         /// </summary>
-        [Route("Post/Edit")]
+        [Route("Edit")]
         [HttpGet]
         public async Task<IActionResult> EditPost(Guid id)
         {
@@ -90,7 +90,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Post] редактирования поста
         /// </summary>
         [Authorize]
-        [Route("Post/Edit")]
+        [Route("Edit")]
         [HttpPost]
         public async Task<IActionResult> EditPost(PostViewModel model, Guid Id)
         {
@@ -108,7 +108,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Get] удаления поста
         /// </summary>
         [HttpGet]
-        [Route("Post/Remove")]
+        [Route("Remove")]
         public async Task<IActionResult> RemovePost(Guid id, bool confirm = true)
         {
             if (confirm)
@@ -120,7 +120,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Post] удаления поста
         /// </summary>
         [HttpPost]
-        [Route("Post/Remove")]
+        [Route("Remove")]
         public async Task<IActionResult> RemovePost(Guid id)
         {
             await _postService.RemovePost(id);
@@ -131,7 +131,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Get] получить все посты
         /// </summary>
         [HttpGet]
-        [Route("Post/Get")]
+        [Route("Get")]
         public async Task<IActionResult> GetPosts()
         {
             var posts = await _postService.GetPosts();
