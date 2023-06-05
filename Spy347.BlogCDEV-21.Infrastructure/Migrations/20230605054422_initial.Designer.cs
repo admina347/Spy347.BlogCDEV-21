@@ -12,7 +12,7 @@ using Spy347.BlogCDEV_21.Infrastructure;
 namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230604114200_initial")]
+    [Migration("20230605054422_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -186,6 +186,10 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AuthorEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uniqueidentifier");

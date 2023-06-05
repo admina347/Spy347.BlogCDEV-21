@@ -4,12 +4,6 @@
     <h2 class="title-margin">Редактирование комментария</h2>
     <form method="post" asp-controller="Comment" asp-action="EditComment"> <div asp-validation-summary="All" class="text-danger"></div>
         <div style="margin-bottom: 5px">
-            <label asp-for="Title"></label><br />
-            <input class="form-control" asp-for="Title" />
-            <span asp-validation-for="Title" class="text-danger"></span>
-            <input class="form-control" asp-for="Id" hidden/>
-        </div>
-        <div style="margin-bottom: 5px">
             <label asp-for="Text"></label><br />
             <input class="form-control" asp-for="Text" />
             <span asp-validation-for="Text" class="text-danger"></span>

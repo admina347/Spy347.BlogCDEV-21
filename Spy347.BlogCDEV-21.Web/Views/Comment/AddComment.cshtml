@@ -4,11 +4,6 @@
     <h2 class="title-margin">Добавление комментария</h2>
     <form method="post" asp-controller="Comment" asp-action="AddComment" asp-route-postId="@Model.PostId"> <div asp-validation-summary="All" class="text-danger"></div>
         <div style="margin-bottom: 5px">
-            <label asp-for="Title"></label><br />
-            <input class="form-control" asp-for="Title" />
-            <span asp-validation-for="Title" class="text-danger"></span>
-        </div>
-        <div style="margin-bottom: 5px">
             <label asp-for="Text"></label><br />
             <input class="form-control" asp-for="Text" />
             <span asp-validation-for="Text" class="text-danger"></span>
@@ -16,7 +11,6 @@
         <div style="margin-bottom: 5px">
             <label asp-for="AuthorId"></label><br />
             <input class="form-control" asp-for="AuthorId"/>
-
         </div>
         <div>
             <input class="btn btn-sm btn-primary" type="submit" value="Создать" />

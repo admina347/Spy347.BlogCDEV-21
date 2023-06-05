@@ -30,7 +30,7 @@
         </div>
         <div style="margin-bottom: 5px">
             <label asp-for="Text"></label><br />
-            <textarea class="form-control" id="editor" rows="10" value="" asp-for="Text"></textarea>
+            <textarea class="form-control" asp-for="Text" id="editor" rows="10" value=""></textarea>
             <span asp-validation-for="Text" class="text-danger"></span>
         </div>
         <div>

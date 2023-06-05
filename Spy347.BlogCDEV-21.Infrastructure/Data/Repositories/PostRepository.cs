@@ -19,7 +19,18 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
 
         public Post GetPost(Guid id)
         {
-            return _context.Posts.Include(p => p.Tags).Include(c => c.Comments).ThenInclude(c => c.Author).Include(u => u.User).FirstOrDefault(p => p.Id == id);
+            return _context.Posts.Include(p => p.Tags).Include(c => c.Comments).Include(u => u.User).FirstOrDefault(p => p.Id == id);
+            
+        
+
+            /* return _context.Posts.Include(p => p.Tags)
+            
+            .Include(u => u.User)
+            .Include(c => c.Comments)
+            .ThenInclude(c => c.Author).ToList()
+            //.Include(c => c.Comments.Select(a => ((User)a.Author))).ToList()
+            
+            .FirstOrDefault(p => p.Id == id); */
             //.ThenInclude(c => c.Author) - not work
         }
 

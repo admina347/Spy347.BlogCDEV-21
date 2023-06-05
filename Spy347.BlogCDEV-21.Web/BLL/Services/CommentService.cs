@@ -21,11 +21,13 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
 
         public async Task<Guid> CreateComment(CommentViewModel model, Guid userId)
         {
+            var author = await _userManager.FindByIdAsync(userId.ToString());
+            
             Comment comment = new Comment
             {
                 //Title = model.Title,
                 Text = model.Text,
-                //Author = model.Author,
+                AuthorEmail = author.Email,
                 PostId = model.PostId,
                 AuthorId = userId,
                 //realAuthorName = _userManager.FindByIdAsync(UserId.ToString()).Result.UserName,

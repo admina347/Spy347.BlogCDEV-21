@@ -148,6 +148,8 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             {
                 if (post.Comments.FirstOrDefault(c => c.Id == comment.Id) == null)
                 {
+                    var user = await _userManager.FindByIdAsync(post.AuthorId.ToString());
+                    comment.Author.Email = user.Email;
                     post.Comments.Add(comment);
                 }
             } */

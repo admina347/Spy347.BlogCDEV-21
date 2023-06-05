@@ -207,6 +207,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AuthorEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AuthorId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
