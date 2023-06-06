@@ -140,6 +140,8 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             var post = _postRepository.GetPost(id);
             //var postview = _mapper.Map<Post>(post);
             
+            //PostViewModel model = _mapper.Map<Post, PostViewModel>(post);
+
             //List<TagViewModel> tags = new List<TagViewModel>();
             //tags = _mapper.Map<List<Tag>>(post.Tags);
             List<TagViewModel> tags = _mapper.Map<List<Tag>, List<TagViewModel>>(post.Tags);
@@ -169,6 +171,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
                 }
             } */
 
+            
             var model = new PostViewModel()
             {
                 Id = id,

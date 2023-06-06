@@ -53,14 +53,26 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return comment.Id;
         }
 
+        public async Task<CommentViewModel> EditComment(Guid id)
+        {
+            var comment = _commentRepository.GetComment(id);
+
+            var model = new CommentViewModel()
+            {
+                Id = id,
+                Text = comment.Text,
+                AuthorEmail = comment.AuthorEmail
+            };
+
+            return model;
+        }
 
         public async Task EditComment(CommentViewModel model)
         {
             var comment = _commentRepository.GetComment(model.Id);
 
-            //comment.Title = model.Title;
             comment.Text = model.Text;
-            //comment.Author = model.Author;
+            comment.AuthorEmail = model.AuthorEmail;
 
             await _commentRepository.UpdateComment(comment);
         }

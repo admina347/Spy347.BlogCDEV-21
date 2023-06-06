@@ -5,13 +5,10 @@
     <form method="post" asp-controller="Comment" asp-action="EditComment"> <div asp-validation-summary="All" class="text-danger"></div>
         <div style="margin-bottom: 5px">
             <label asp-for="Text"></label><br />
+            <input class="form-control" asp-for="Id" type="hidden"/>
             <input class="form-control" asp-for="Text" />
+            <input class="form-control" asp-for="AuthorEmail" value="@Model.AuthorEmail" type="hidden"/>
             <span asp-validation-for="Text" class="text-danger"></span>
-        </div>
-        <div style="margin-bottom: 5px">
-            <label asp-for="AuthorId"></label><br />
-            <input class="form-control" asp-for="AuthorId" value="@Model.AuthorId"/>
-
         </div>
         <div>
             <input class="btn btn-sm btn-primary" type="submit" value="Сохранить"/>

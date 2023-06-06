@@ -56,10 +56,10 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// </summary>
         [Route("Edit")]
         [HttpGet]
-        public IActionResult EditComment(Guid id)
+        public async Task<IActionResult> EditComment(Guid id)
         {
-            var view = new CommentViewModel { Id = id };
-            return View(view);
+            var model = await _commentService.EditComment(id);
+            return View(model);
         }
 
         /// <summary>

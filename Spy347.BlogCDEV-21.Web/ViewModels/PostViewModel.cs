@@ -12,6 +12,8 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels
         public string Text { get; set; }
         public string AuthorId { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "Комментарий", Prompt = "Комментарий")]
         public string Comment { get; set; }
 
         public Guid UserId { get; set; }

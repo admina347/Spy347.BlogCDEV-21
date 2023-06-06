@@ -150,7 +150,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var post = _commentService.AddCommentFromPost(model, new Guid(user.Id));
-            return RedirectToAction("Get?id=" + postId, "Post");
+            return RedirectToAction("Get", "Post");
         }
 
 
