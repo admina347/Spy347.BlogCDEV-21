@@ -37,6 +37,23 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return comment.Id;
         }
 
+        public async Task<Guid> AddCommentFromPost(PostViewModel model, Guid userId)
+        {
+            var author = await _userManager.FindByIdAsync(userId.ToString());
+            
+            Comment comment = new Comment
+            {
+                Text = model.Comment,
+                AuthorEmail = author.Email,
+                PostId = model.Id,
+                AuthorId = userId,
+            };
+
+            await _commentRepository.AddComment(comment);
+            return comment.Id;
+        }
+
+
         public async Task EditComment(CommentViewModel model)
         {
             var comment = _commentRepository.GetComment(model.Id);

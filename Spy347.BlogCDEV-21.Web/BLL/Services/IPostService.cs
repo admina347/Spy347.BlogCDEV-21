@@ -11,6 +11,6 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         Task EditPost(PostViewModel model, Guid id);
         Task<List<Post>> GetPosts();
         Task RemovePost(Guid id);
-        Task<Post> ShowPost(Guid id);
+        Task<PostViewModel> ShowPost(Guid id);
     }
 }

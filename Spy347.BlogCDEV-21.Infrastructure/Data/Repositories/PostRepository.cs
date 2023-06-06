@@ -20,8 +20,6 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
         public Post GetPost(Guid id)
         {
             return _context.Posts.Include(p => p.Tags).Include(c => c.Comments).Include(u => u.User).FirstOrDefault(p => p.Id == id);
-            
-        
 
             /* return _context.Posts.Include(p => p.Tags)
             

@@ -135,9 +135,54 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return posts;
         }
 
-        public async Task<Post> ShowPost(Guid id)
+        public async Task<PostViewModel> ShowPost(Guid id)
         {
             var post = _postRepository.GetPost(id);
+            //var postview = _mapper.Map<Post>(post);
+            
+            //List<TagViewModel> tags = new List<TagViewModel>();
+            //tags = _mapper.Map<List<Tag>>(post.Tags);
+            List<TagViewModel> tags = _mapper.Map<List<Tag>, List<TagViewModel>>(post.Tags);
+
+            /* foreach (var tag in post.Tags)
+            {
+                //var t = _mapper.Map<TagViewModel>(tag);
+                var t = new TagViewModel()
+                {
+                    Id = tag.Id,
+                    Name = tag.Name
+                };
+                tags.Add(t);
+            } */
+
+            //var tags = _tagRepository.GetAllTags().Select(t => new TagViewModel() { Id = t.Id, Name = t.Name }).ToList();
+            //var tags = _postRepository.Get
+            /* foreach (var tag in tags)
+            {
+                foreach (var postTag in post.Tags)
+                {
+                    if (postTag.Id == tag.Id)
+                    {
+                        tag.IsSelected = true;
+                        break;
+                    }
+                }
+            } */
+
+            var model = new PostViewModel()
+            {
+                Id = id,
+                Title = post.Title,
+                Text = post.Text,
+                User = post.User,
+                Comments = post.Comments,
+                //Tags = post.Tags
+                Tags = tags
+            };
+
+            
+
+
             //var user = await _userManager.FindByIdAsync(post.AuthorId.ToString());
             //var author = _userManager.FindByIdAsync(post.AuthorId.ToString());
             //var comments = _commentRepo.GetCommentsByPostId(post.Id);
@@ -171,7 +216,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
                 post.AuthorId = "nonUsernamed";
             } */
 
-            return post;
+            return model;
         }
 
         

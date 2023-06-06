@@ -18,6 +18,9 @@ namespace Spy347.BlogCDEV_21.Web.BLL
             CreateMap<PostViewModel, Post>();
             CreateMap<TagViewModel, Tag>();
             CreateMap<UserEditViewModel, User>();
+            //
+            CreateMap<Tag, TagViewModel>();
+            //CreateMap<List<Tag>, List<TagViewModel>>();
         }
     }
 }

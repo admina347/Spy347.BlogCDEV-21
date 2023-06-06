@@ -13,7 +13,7 @@
         <h6 class="card-title"><a method="get" asp-controller="Post" asp-action="AddPost">Добавить статью</a></h6>
         foreach (var post in Model)
         {
-            <div class="card w-75">
+            <div class="card w-75 mt-2">
                 <div class="card-body">
                     <h4 class="card-title">@post.Title</h4>
                     @foreach (var tag in post.Tags)
@@ -22,7 +22,7 @@
                     }
                     @if (User.IsInRole("Администратор"))
                     {
-                        <div>
+                        <div class="card-body">
                             <a class="btn btn-outline-info button" method="get" asp-controller="Post" asp-action="EditPost"
                                 asp-route-id="@post.Id">Редактировать</a>
                             <a class="btn btn-outline-danger button" method="post" asp-controller="Post" asp-action="RemovePost"

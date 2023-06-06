@@ -14,15 +14,17 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
     {
         private readonly IPostRepository _postRepository;
         private readonly IPostService _postService;
+        private readonly ICommentService _commentService;
         private readonly ITagRepository _tagRepository;
         private readonly UserManager<User> _userManager;
         private IMapper _mapper;
         private readonly ILogger<PostController> _logger;
 
-        public PostController(IPostRepository postRepository, IPostService postService, ITagRepository tagRepository, UserManager<User> userManager, IMapper mapper, ILogger<PostController> logger)
+        public PostController(IPostRepository postRepository, IPostService postService, ICommentService commentService, ITagRepository tagRepository, UserManager<User> userManager, IMapper mapper, ILogger<PostController> logger)
         {
             _postRepository = postRepository;
             _postService = postService;
+            _commentService = commentService;
             _tagRepository = tagRepository;
             _userManager = userManager;
             _mapper = mapper;
@@ -101,7 +103,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             }
 
             await _postService.EditPost(model, Id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Post");
         }
 
         /// <summary>
@@ -138,6 +140,19 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
 
             return View(posts);
         }
+
+        // <summary>
+        /// [Post] добавление комментария
+        /// </summary>
+        [HttpPost]
+        [Route("AddComment")]
+        public async Task<IActionResult> AddComment(PostViewModel model, Guid postId)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var post = _commentService.AddCommentFromPost(model, new Guid(user.Id));
+            return RedirectToAction("Get?id=" + postId, "Post");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
