@@ -1,0 +1,32 @@
+@using Spy347.BlogCDEV_21.Infrastructure.Models
+@model List<Comment>
+
+@{
+  @if (Model.Count() == 0)
+  {
+    <h5 class="card-title">Нет комментариев</h5>
+  }
+  else
+  {
+    <h5 class="card-title">Все комментарии</h5>
+    foreach (var comment in Model)
+    {
+      <div class="card w-75 mt-2">
+        <div class="card-body">
+          <p class="text-start">@comment.Text</p>
+          <p class="text-start">Статья: @comment.Post.Title</p>
+          @if (User.IsInRole("Администратор"))
+          {
+            <div class="text-start">
+              <a class="btn btn-outline-info button" method="get" asp-controller="Comment" asp-action="EditComment"
+                asp-route-id="@comment.Id">Редактировать</a>
+              <a class="btn btn-outline-danger button" method="post" asp-controller="Comment" asp-action="RemoveComment"
+                asp-route-id="@comment.Id">Удалить</a>
+            </div>
+          }
+          <p class="text-end text-black-50">@comment.AuthorEmail</p>
+        </div>
+      </div>
+    }
+  }
+}

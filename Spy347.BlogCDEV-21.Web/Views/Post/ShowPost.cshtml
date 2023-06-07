@@ -46,8 +46,9 @@
         }
     }
 }
-
-<div class="w-75">
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="w-75">
     <form method="post" asp-controller="Post" asp-action="AddComment" asp-route-postId="@Model.Id">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div style="margin-bottom: 5px">
@@ -61,3 +62,4 @@
         </div>
     </form>
 </div>
+}

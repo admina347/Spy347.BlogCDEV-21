@@ -14,7 +14,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
 
         public List<Comment> GetAllComments()
         {
-            return _context.Comments.ToList();
+            return _context.Comments.Include(c => c.Post).ToList();
         }
 
         public Comment GetComment(Guid id)

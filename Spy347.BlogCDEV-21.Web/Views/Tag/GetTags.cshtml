@@ -18,14 +18,14 @@
           <h5 class="card-title">@tag.Name</h5>
           @if (User.IsInRole("Администратор"))
           {
-            <div class="card-body">
+            <div class="text-start">
               <a class="btn btn-outline-info button" method="get" asp-controller="Tag" asp-action="EditTag"
                 asp-route-id="@tag.Id">Редактировать</a>
               <a class="btn btn-outline-danger button" method="post" asp-controller="Tag" asp-action="RemoveTag"
                 asp-route-id="@tag.Id">Удалить</a>
             </div>
           }
-          <p class="text-end text-black-60">Статей по тегу: @tag.Posts.Count()</p>
+          <p class="text-end text-black-50">Статей по тегу: @tag.Posts.Count()</p>
         </div>
       </div>
     }

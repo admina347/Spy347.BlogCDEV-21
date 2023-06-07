@@ -73,7 +73,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             if (ModelState.IsValid)
             {
                 await _commentService.EditComment(model);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Get", "Comment");
             }
             else
             {
@@ -91,7 +91,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         {
             if (confirm)
                 await RemoveComment(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Comment");
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         public async Task<IActionResult> RemoveComment(Guid id)
         {
             await _commentService.RemoveComment(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Comment");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -110,5 +110,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         {
             return View("Error!");
         }
+
+        /// <summary>
+        /// [Get] получение всех комментариев
+        /// </summary>
+        [Route("Get")]
+        [Authorize(Roles = "Администратор, Модератор")]
+        [HttpGet]
+        public async Task<IActionResult> GetComments()
+        {
+            var comments = await _commentService.GetComments();
+            return View(comments);
+        }
+
     }
 }
