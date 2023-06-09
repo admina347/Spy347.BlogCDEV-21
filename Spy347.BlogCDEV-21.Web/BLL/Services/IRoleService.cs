@@ -9,5 +9,6 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         Task EditRole(RoleViewModel model);
         Task<List<Role>> GetRoles();
         Task RemoveRole(Guid id);
+        Task<RoleViewModel> EditRole(Guid id);
     }
 }

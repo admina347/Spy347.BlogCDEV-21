@@ -58,10 +58,11 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [Route("Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        public IActionResult EditRole(Guid id)
+        public async Task<IActionResult> EditRole(Guid id)
         {
-            var view = new RoleViewModel { Id = id };
-            return View(view);
+            var model = await _roleService.EditRole(id);
+
+            return View(model);
         }
 
         /// <summary>
@@ -76,7 +77,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             {
                 await _roleService.EditRole(model);
                 _logger.LogDebug($"Измененна роль - {model.Name}");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Get", "Role");
             }
             else
             {
@@ -95,7 +96,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         {
             if (isConfirm)
                 await RemoveRole(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Role");
         }
 
         /// <summary>
@@ -108,13 +109,13 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         {
             await _roleService.RemoveRole(id);
             _logger.LogDebug($"Удаленна роль - {id}");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Role");
         }
 
         /// <summary>
         /// [Get] Метод, получения всех тегов
         /// </summary>
-        [Route("GetRoles")]
+        [Route("Get")]
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]
         public async Task<IActionResult> GetRoles()

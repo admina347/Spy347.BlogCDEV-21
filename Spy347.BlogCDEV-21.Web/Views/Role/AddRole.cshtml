@@ -9,6 +9,11 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div style="margin-bottom: 5px">
+            <label asp-for="Description"></label><br />
+            <textarea class="form-control" asp-for="Description" id="editor" rows="3" value=""></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div style="margin-bottom: 5px">
             <label asp-for="SecurityLevel"></label><br />
             <input class="form-control" asp-for="SecurityLevel" />
             <span asp-validation-for="SecurityLevel" class="text-danger"></span>
