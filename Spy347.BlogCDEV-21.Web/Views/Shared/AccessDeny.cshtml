@@ -1,0 +1,14 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Доступ запрещен";
+}
+
+<h1 class="text-danger">Доступ запрещен!</h1>
+<h2 class="text-danger">У вас нет прав на просмотр содержимиго.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
