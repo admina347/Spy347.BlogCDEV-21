@@ -20,6 +20,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL
             CreateMap<UserEditViewModel, User>();
             //
             CreateMap<Tag, TagViewModel>();
+            CreateMap<Role, RoleViewModel>();
             //CreateMap<List<Tag>, List<TagViewModel>>();
         }
     }

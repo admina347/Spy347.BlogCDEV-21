@@ -25,8 +25,16 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels.Account
         public string? NewPassword { get; set; }
 
         [Display(Name = "Роли")]
-        public List<RoleViewModel> Roles { get; set; }
+        //public List<IdentiryRole> Roles { get; set; }
 
-        public int Id { get; set; }
+        public List<RoleViewModel> Roles { get; set; }
+        public IList<string> UserRoles { get; set; }
+        public UserEditViewModel()
+        {
+            Roles = new List<RoleViewModel>();
+            UserRoles = new List<string>();
+        }
+
+        public Guid Id { get; set; }
     }
 }

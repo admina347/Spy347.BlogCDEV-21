@@ -1,4 +1,5 @@
 using AutoMapper;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
@@ -55,11 +56,32 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return result;
         }
 
-        public async Task<UserEditViewModel> EditAccount(int id)
+        public async Task<UserEditViewModel> EditAccount(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
+            var roles = await _userManager.GetRolesAsync(user);
+
+            foreach (var role in roles)
+            {
+                var newRole = new Role { Name = role };
+                user.Roles.Add(newRole);
+            }
 
             var allRolesName = _roleManager.Roles.ToList();
+
+            List<RoleViewModel> roleView = _mapper.Map<List<Role>, List<RoleViewModel>>(allRolesName);
+
+            foreach (var role in roleView)
+            {
+                foreach (var userRole in user.Roles)
+                {
+                    if (userRole.Name == role.Name)
+                    {
+                        role.IsSelected = true;
+                        break;
+                    }
+                }
+            }
 
             UserEditViewModel model = new UserEditViewModel
             {
@@ -69,7 +91,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
                 Email = user.Email,
                 NewPassword = string.Empty,
                 Id = id,
-                Roles = allRolesName.Select(r => new RoleViewModel() { Id = new Guid(r.Id), Name = r.Name }).ToList(),
+                Roles = roleView//allRolesName.Select(r => new RoleViewModel() { Id = new Guid(r.Id), Name = r.Name }).ToList(),
             };
 
             return model;
@@ -118,7 +140,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return result;
         }
 
-        public async Task RemoveAccount(int id)
+        public async Task RemoveAccount(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
 

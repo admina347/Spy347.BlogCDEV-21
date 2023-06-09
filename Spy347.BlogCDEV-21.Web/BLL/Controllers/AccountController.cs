@@ -31,7 +31,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] login
         /// </summary>
-        [Route("Account/Login")]
+        [Route("Login")]
         [HttpGet]
         public IActionResult Login()
         {
@@ -41,7 +41,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Post] login
         /// </summary>
-        [Route("Account/Login")]
+        [Route("Login")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -63,7 +63,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] регистрация
         /// </summary>
-        [Route("Account/Register")]
+        [Route("Register")]
         [HttpGet]
         public IActionResult Register()
         {
@@ -73,7 +73,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Post] регистрация
         /// </summary>
-        [Route("Account/Register")]
+        [Route("Register")]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -100,10 +100,10 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] редактирование
         /// </summary>
-        [Route("Account/Edit")]
+        [Route("Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        public async Task<IActionResult> EditAccount(int id)
+        public async Task<IActionResult> EditAccount(Guid id)
         {
             var model = await _accountService.EditAccount(id);
             return View(model);
@@ -112,7 +112,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Post] редактирование
         /// </summary>
-        [Route("Account/Edit")]
+        [Route("Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> EditAccount(UserEditViewModel model)
@@ -122,7 +122,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             if (result.Succeeded)
             {
                 _logger.LogDebug($"Аккаунт - {model.UserName} был изменен");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Get", "Account");
             }    
             else
             {
@@ -134,34 +134,34 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] удаление аккаунта
         /// </summary>
-        [Route("Account/Remove")]
+        [Route("Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        public async Task<IActionResult> RemoveAccount(int id, bool confirm = true)
+        public async Task<IActionResult> RemoveAccount(Guid id, bool confirm = true)
         {
             if (confirm)
                 await RemoveAccount(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Account");
         }
 
         /// <summary>
         /// [Post] удаление аккаунта
         /// </summary>
-        [Route("Account/Remove")]
+        [Route("Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
-        public async Task<IActionResult> RemoveAccount(int id)
+        public async Task<IActionResult> RemoveAccount(Guid id)
         {
             await _accountService.RemoveAccount(id);
             _logger.LogDebug($"Remove account {id}");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Account");
         }
 
         /// <summary>
         /// [Post] выхода из аккаунта
         /// </summary>
-        [Route("Account/Logout")]
+        [Route("Logout")]
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> LogoutAccount(int id)
@@ -173,7 +173,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] получения всех пользователей
         /// </summary>
-        [Route("Account/Get")]
+        [Route("Get")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> GetAccounts()

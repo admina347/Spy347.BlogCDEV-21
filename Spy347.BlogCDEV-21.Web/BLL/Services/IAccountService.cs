@@ -6,12 +6,12 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
 {
     public interface IAccountService
     {
-        Task<UserEditViewModel> EditAccount(int id);
+        Task<UserEditViewModel> EditAccount(Guid id);
         Task<IdentityResult> EditAccount(UserEditViewModel model);
         Task<List<User>> GetAccounts();
         Task<SignInResult> Login(LoginViewModel model);
         Task LogoutAccount();
         Task<IdentityResult> Register(RegisterViewModel model);
-        Task RemoveAccount(int id);
+        Task RemoveAccount(Guid id);
     }
 }
