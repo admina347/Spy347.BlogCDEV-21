@@ -10,5 +10,6 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
         Task RemovePost(Guid id);
         Task<bool> SaveChangesAsync();
         Task UpdatePost(Post post);
+        Task PostViewCountUpdate(Guid id);
     }
 }

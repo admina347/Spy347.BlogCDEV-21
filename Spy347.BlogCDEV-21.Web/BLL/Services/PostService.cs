@@ -138,6 +138,9 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         public async Task<PostViewModel> ShowPost(Guid id)
         {
             var post = _postRepository.GetPost(id);
+
+            //Счетчик просмотров
+            await _postRepository.PostViewCountUpdate(id);
             //var postview = _mapper.Map<Post>(post);
             
             //PostViewModel model = _mapper.Map<Post, PostViewModel>(post);

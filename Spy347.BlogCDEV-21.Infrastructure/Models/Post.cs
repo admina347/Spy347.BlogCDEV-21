@@ -10,6 +10,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Models
         [MaxLength(100)]
         public string Title { get; set; } = String.Empty;
         public string Text { get; set; } = String.Empty;
+        public int ViewsCount   { get; set; }
         public string AuthorId { get; set; } = String.Empty;
 
         public DateTime CreatedData { get; set; } = DateTime.Now;

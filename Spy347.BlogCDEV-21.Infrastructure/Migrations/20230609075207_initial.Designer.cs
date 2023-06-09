@@ -12,7 +12,7 @@ using Spy347.BlogCDEV_21.Infrastructure;
 namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230605054422_initial")]
+    [Migration("20230609075207_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -241,6 +241,9 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
                     b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("ViewsCount")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId1");
@@ -342,6 +345,10 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Migrations
             modelBuilder.Entity("Spy347.BlogCDEV_21.Infrastructure.Models.Role", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SecurityLevel")
                         .HasColumnType("int");

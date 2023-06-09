@@ -54,6 +54,14 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             }
         }
 
+        public async Task PostViewCountUpdate(Guid id)
+        {
+            var post = GetPost(id);
+            post.ViewsCount = post.ViewsCount + 1;
+            _context.Posts.Update(post);
+            await SaveChangesAsync();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             if (await _context.SaveChangesAsync() > 0)

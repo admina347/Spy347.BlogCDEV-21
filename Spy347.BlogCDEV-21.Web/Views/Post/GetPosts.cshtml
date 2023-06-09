@@ -22,7 +22,7 @@
                     }
                     @if (User.IsInRole("Администратор"))
                     {
-                        <div class="card-body">
+                        <div class="text-satrt">
                             <a class="btn btn-outline-info button" method="get" asp-controller="Post" asp-action="EditPost"
                                 asp-route-id="@post.Id">Редактировать</a>
                             <a class="btn btn-outline-danger button" method="post" asp-controller="Post" asp-action="RemovePost"
@@ -33,11 +33,12 @@
                     }
                     else
                     {
-                        <div>
+                        <div class="text-satrt">
                             <a class="btn btn-outline-secondary" method="get" asp-controller="Post" asp-action="ShowPost"
                                 asp-route-id="@post.Id">Просмотреть</a>
                         </div>
                     }
+                        <p class="text-end text-black-50">Просмотров: @post.ViewsCount</p>
                 </div>
             </div>
         }
