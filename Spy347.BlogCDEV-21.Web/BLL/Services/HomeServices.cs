@@ -29,9 +29,9 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             var user1 = _mapper.Map<User>(testUser2);
             var user2 = _mapper.Map<User>(testUser3);
 
-            var userRole = new Role() { Name = "Пользователь", SecurityLevel = 0 };
-            var moderRole = new Role() { Name = "Модератор", SecurityLevel = 1 };
-            var adminRole = new Role() { Name = "Администратор", SecurityLevel = 3 };
+            var userRole = new Role() { Name = "Пользователь", Description = "Стандартная роль приложения", SecurityLevel = 0 };
+            var moderRole = new Role() { Name = "Модератор", Description = "Данная роль позволяет выполнять редактирование, удаление комментариев и статей в приложении", SecurityLevel = 1 };
+            var adminRole = new Role() { Name = "Администратор", Description = "Роль с максимальными возможностями в приложении", SecurityLevel = 3 };
 
             await _userManager.CreateAsync(user, testUser.Password);
             await _userManager.CreateAsync(user1, testUser2.Password);
