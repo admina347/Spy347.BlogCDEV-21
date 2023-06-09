@@ -98,6 +98,43 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         }
 
         /// <summary>
+        /// [Get] новы пользователь
+        /// </summary>
+        [Route("Add")]
+        [HttpGet]
+        public IActionResult AddAccount()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// [Post] добавить нового пользователя
+        /// </summary>
+        [Route("Add")]
+        [HttpPost]
+        public async Task<IActionResult> AddAccount(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountService.AddUser(model);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation($"Создан аккаунт - {model.Email}");
+                    return RedirectToAction("Get", "Account");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        /// <summary>
         /// [Get] редактирование
         /// </summary>
         [Route("Edit")]

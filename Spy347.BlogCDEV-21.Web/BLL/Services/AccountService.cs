@@ -49,6 +49,27 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             }
         }
 
+        public async Task<IdentityResult> AddUser(RegisterViewModel model)
+        {
+            var newUser = _mapper.Map<User>(model);
+
+            var result = await _userManager.CreateAsync(newUser, model.Password);
+            if (result.Succeeded)
+            {
+                var userRole = new Role() { Name = "Пользователь", SecurityLevel = 0 };
+                await _roleManager.CreateAsync(userRole);
+                
+                await _userManager.AddToRoleAsync(newUser, userRole.Name);
+
+                return result;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+
         public async Task<SignInResult> Login(LoginViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);

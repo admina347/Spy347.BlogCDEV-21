@@ -12,6 +12,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         Task<SignInResult> Login(LoginViewModel model);
         Task LogoutAccount();
         Task<IdentityResult> Register(RegisterViewModel model);
+        Task<IdentityResult> AddUser(RegisterViewModel model);
         Task RemoveAccount(Guid id);
     }
 }
