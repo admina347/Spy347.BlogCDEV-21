@@ -15,8 +15,15 @@
 					    @:<tr></tr>
 				    }
 				    <td>
-					    @Html.CheckBoxFor(model => model.Roles[i].IsSelected)
-					    <lable class="tag-margin">@Model.Roles[i].Name</lable>
+                        @if(Model.Roles[i].Name == "Пользователь")
+                        {
+                            @Html.CheckBoxFor(model => model.Roles[i].IsSelected, new { @disabled = "disabled"})
+                        }
+                        else
+                        {
+                            @Html.CheckBoxFor(model => model.Roles[i].IsSelected)
+                        }
+					    <lable class="tag-margin">@Model.Roles[i].Name &nbsp;</lable>
 					    @Html.HiddenFor(model => model.Roles[i].Id)
 				    </td>
 			    }

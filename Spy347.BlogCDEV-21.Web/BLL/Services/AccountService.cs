@@ -153,6 +153,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
                 }
                 else
                 {
+                    if (roleName != "Пользователь")
                     await _userManager.RemoveFromRoleAsync(user, roleName);
                 }
             }
