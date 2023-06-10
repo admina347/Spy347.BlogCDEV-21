@@ -34,7 +34,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// <summary>
         /// [Get] показ поста
         /// </summary>
-        [Route("Show")]
+        [Route("Show/{id?}")]
         [HttpGet]
         public async Task<IActionResult> ShowPost(Guid id)
         {
@@ -150,7 +150,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var post = _commentService.AddCommentFromPost(model, new Guid(user.Id));
-            return RedirectToAction("Get", "Post");
+            return RedirectToAction("Show", "Post", new {id = postId});
         }
 
 
