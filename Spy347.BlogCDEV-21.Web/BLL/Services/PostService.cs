@@ -107,16 +107,20 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             post.Title = model.Title;
             post.Text = model.Text;
 
-            foreach (var tag in model.Tags)
+            //Если есть теги
+            if (model.Tags is not null)
             {
-                var tagChanged = _tagRepository.GetTag(tag.Id);
-                if (tag.IsSelected)
+                foreach (var tag in model.Tags)
                 {
-                    post.Tags.Add(tagChanged);
-                }
-                else
-                {
-                    post.Tags.Remove(tagChanged);
+                    var tagChanged = _tagRepository.GetTag(tag.Id);
+                    if (tag.IsSelected)
+                    {
+                        post.Tags.Add(tagChanged);
+                    }
+                    else
+                    {
+                        post.Tags.Remove(tagChanged);
+                    }
                 }
             }
 

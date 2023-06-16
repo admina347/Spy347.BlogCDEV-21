@@ -115,7 +115,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         {
             if (confirm)
                 await RemovePost(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Post");
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         public async Task<IActionResult> RemovePost(Guid id)
         {
             await _postService.RemovePost(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Post");
         }
 
         /// <summary>
