@@ -1,5 +1,5 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+using NLog.Web;
 using Microsoft.EntityFrameworkCore;
 using Spy347.BlogCDEV_21.Infrastructure;
 using Spy347.BlogCDEV_21.Infrastructure.Models;
@@ -47,6 +47,12 @@ var mapperConfig = new MapperConfiguration((v) =>
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
+// Connect logger
+builder.Logging
+  .ClearProviders()
+  .SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace)
+  .AddConsole()
+  .AddNLog("nlog");
 
 var app = builder.Build();
 
