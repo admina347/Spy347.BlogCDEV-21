@@ -52,7 +52,7 @@ builder.Logging
   .ClearProviders()
   .SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace)
   .AddConsole()
-  .AddNLog("nlog");
+  .AddNLog("NLog");
 
 var app = builder.Build();
 

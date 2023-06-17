@@ -61,11 +61,6 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [Route("Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        /* public IActionResult EditTag(Guid id)
-        {
-            var view = new TagViewModel { Id = id};
-            return View(view);
-        } */
         public async Task<IActionResult> EditTag(Guid id)
         {
             var model = await _tagService.EditTag(id);

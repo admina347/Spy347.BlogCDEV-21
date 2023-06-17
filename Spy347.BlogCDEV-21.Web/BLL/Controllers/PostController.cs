@@ -73,6 +73,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             }
 
             var postId = await _postService.CreatePost(model);
+            _logger.LogInformation($"Добавлена статья - {model.Title}");
             return RedirectToAction("Get", "Post");
         }
 
@@ -103,6 +104,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             }
 
             await _postService.EditPost(model, Id);
+            _logger.LogDebug($"Изменена статья - {model.Title}");
             return RedirectToAction("Get", "Post");
         }
 
@@ -126,6 +128,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         public async Task<IActionResult> RemovePost(Guid id)
         {
             await _postService.RemovePost(id);
+            _logger.LogDebug($"Удалена статья - {id}");
             return RedirectToAction("Get", "Post");
         }
 

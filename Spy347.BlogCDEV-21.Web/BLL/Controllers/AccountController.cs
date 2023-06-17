@@ -190,7 +190,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         public async Task<IActionResult> RemoveAccount(Guid id)
         {
             await _accountService.RemoveAccount(id);
-            _logger.LogDebug($"Remove account {id}");
+            _logger.LogDebug($"Аккаунт {id} удалён");
 
             return RedirectToAction("Get", "Account");
         }
