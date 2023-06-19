@@ -1,0 +1,65 @@
+@using Spy347.BlogCDEV_21.Web.ViewModels;
+@model PostViewModel
+
+<div class="card w-75 p-2">
+    <h1 class="card-title">@Model.Title</h1>
+    @{
+        if (Model.Tags.Count() > 0)
+        {
+            <div>
+                @foreach (var tag in Model.Tags)
+                {
+                    <span class="badge rounded-pill text-bg-success" style="color:green; display:inline;">@tag.Name</span>
+                }
+            </div>
+        }
+    }
+    <p class="text-justify">@Model.Text</p>
+    <hr />
+    <h7 class="text-end">@Model.User.Email</h7>
+</div>
+@{
+    if (Model.Comments.Count() == 0)
+    {
+        <h5 style="margin: 5px; color: gray;">Коментарии отсутствуют</h5>
+    }
+    else
+    {
+        <h5 style="margin: 5px; color: gray;">Коментарии к статье</h5>
+        foreach (var comment in Model.Comments)
+        {
+            <div class="card w-75 p-2 mt-2">
+                <p class="text-start">@comment.Text</p>
+                @if (User.IsInRole("Администратор")) //|| User.Identity.Name == comment.realAuthorName
+                {
+                    <div class="text-start">
+                        <a class="btn btn-outline-info button" method="get" asp-controller="Comment" asp-action="EditComment"
+                            asp-route-id="@comment.Id">Редактировать</a>
+                        <a class="btn btn-outline-danger button" method="post" asp-controller="Comment" asp-action="RemoveComment"
+                            asp-route-id="@comment.Id">Удалить</a>
+                    </div>
+                }
+            </div>
+            <div class="w-75 mt-1 text-end">
+                <p class="tag tag-success">@comment.AuthorEmail</p>
+            </div>
+        }
+    }
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="w-75">
+    <form method="post" asp-controller="Post" asp-action="AddComment" asp-route-postId="@Model.Id">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div style="margin-bottom: 5px">
+            <input asp-for="Id" type="hidden" />
+            <input asp-for="UserId" type="hidden" />
+            <textarea class="form-control" asp-for="Comment"></textarea>
+            <span asp-validation-for="Comment" class="text-danger"></span>
+        </div>
+        <div>
+            <input class="btn btn-sm btn-primary" type="submit" value="Оставить комментарий" />
+        </div>
+    </form>
+</div>
+}
