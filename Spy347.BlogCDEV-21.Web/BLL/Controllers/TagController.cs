@@ -144,11 +144,5 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             var tags = await _tagService.GetTags();
             return View(tags);
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error");
-        }
     }
 }

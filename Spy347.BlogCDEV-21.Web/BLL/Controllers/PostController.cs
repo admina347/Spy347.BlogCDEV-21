@@ -191,12 +191,5 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             var post = _commentService.AddCommentFromPost(model, new Guid(user.Id));
             return RedirectToAction("Show", "Post", new {id = postId});
         }
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
     }
 }

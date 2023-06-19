@@ -237,11 +237,5 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
 
             return View(users);
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
     }
 }

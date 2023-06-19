@@ -123,12 +123,6 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             return RedirectToAction("Get", "Comment");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
-
         /// <summary>
         /// [Get] получение всех комментариев
         /// </summary>
@@ -140,6 +134,5 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             var comments = await _commentService.GetComments();
             return View(comments);
         }
-
     }
 }
