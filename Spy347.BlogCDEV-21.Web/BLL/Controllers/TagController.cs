@@ -7,6 +7,7 @@ using Spy347.BlogCDEV_21.Web.ViewModels;
 
 namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
 {
+    [CustomAuthorize]
     [Route("[controller]")]
     public class TagController : Controller
     {
@@ -66,7 +67,6 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             try
             {
                 var model = await _tagService.EditTag(id);
-
                 return View(model);
             }
             catch (Exception ex)
@@ -137,7 +137,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         /// [Get] получение всех тегов
         /// </summary>
         [Route("Get")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [CustomAuthorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> GetTags()
         {

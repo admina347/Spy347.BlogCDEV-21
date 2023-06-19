@@ -6,6 +6,8 @@ using Spy347.BlogCDEV_21.Infrastructure.Models;
 using Spy347.BlogCDEV_21.Infrastructure.Repositories;
 using Spy347.BlogCDEV_21.Web.BLL;
 using Spy347.BlogCDEV_21.Web.BLL.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,8 +56,12 @@ builder.Logging
   .AddConsole()
   .AddNLog("NLog");
 
-var app = builder.Build();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/Home/401";
+});
 
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -71,6 +77,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 
 app.MapControllerRoute(
     name: "default",
