@@ -18,9 +18,9 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             return _context.Tags.Include(p => p.Posts).ToHashSet();
         }
 
-        public Tag GetTag(Guid id)
+        public async Task<Tag> GetTag(Guid id)
         {
-            return _context.Tags.FirstOrDefault(t => t.Id == id);
+            return await _context.Tags.FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task AddTag(Tag tag)
@@ -37,7 +37,7 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
 
         public async Task RemoveTag(Guid id)
         {
-            _context.Tags.Remove(GetTag(id));
+            _context.Tags.Remove(await GetTag(id));
             await SaveChangesAsync();
         }
 

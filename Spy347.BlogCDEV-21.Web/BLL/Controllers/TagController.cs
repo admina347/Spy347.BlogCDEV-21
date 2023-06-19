@@ -63,11 +63,19 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> EditTag(Guid id)
         {
-            var model = await _tagService.EditTag(id);
+            try
+            {
+                var model = await _tagService.EditTag(id);
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось получить тег по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Tag");
+            }
         }
-
 
         /// <summary>
         /// [Post] редактирование тега
@@ -80,7 +88,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             if (ModelState.IsValid)
             {
                 await _tagService.EditTag(model);
-                _logger.LogDebug($"Изменен тег - {model.Name}");
+                _logger.LogInformation($"Изменен тег - {model.Name}");
                 return RedirectToAction("Get", "Tag");
             }
             else
@@ -98,9 +106,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveTag(Guid id, bool isConfirm = true)
         {
-            if (isConfirm)
-                await RemoveTag(id);
-            return RedirectToAction("Get", "Tag");
+            try
+            {
+                if (isConfirm)
+                    await RemoveTag(id);
+                return RedirectToAction("Get", "Tag");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось удалить тег по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Tag");
+            }
         }
 
         /// <summary>

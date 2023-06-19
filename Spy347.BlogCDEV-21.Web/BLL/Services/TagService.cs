@@ -13,6 +13,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         private readonly ITagRepository _tagRepository;
         private IMapper _mapper;
 
+
         public TagService(ITagRepository tagRepository, IMapper mapper)
         {
             _tagRepository = tagRepository;
@@ -32,13 +33,14 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             if (string.IsNullOrEmpty(model.Name))
                 return;
 
-            var tag = _tagRepository.GetTag(model.Id);
+            var tag = await _tagRepository.GetTag(model.Id);
             tag.Name = model.Name;
             await _tagRepository.UpdateTag(tag);
         }
         public async Task<TagViewModel> EditTag(Guid id)
         {
-            var tag = _tagRepository.GetTag(id);
+
+            var tag = await _tagRepository.GetTag(id);
 
             var model = new TagViewModel()
             {

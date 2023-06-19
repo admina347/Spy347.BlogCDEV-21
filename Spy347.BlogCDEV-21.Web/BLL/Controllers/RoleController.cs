@@ -60,9 +60,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRole(Guid id)
         {
-            var model = await _roleService.EditRole(id);
-
-            return View(model);
+            try
+            {
+                var model = await _roleService.EditRole(id);
+    
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось изменить роль по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Role");
+            }
         }
 
         /// <summary>
@@ -94,9 +103,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveRole(Guid id, bool isConfirm = true)
         {
-            if (isConfirm)
-                await RemoveRole(id);
-            return RedirectToAction("Get", "Role");
+            try
+            {
+                if (isConfirm)
+                    await RemoveRole(id);
+                return RedirectToAction("Get", "Role");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось удалить роль по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Role");
+            }
         }
 
         /// <summary>

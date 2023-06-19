@@ -58,8 +58,17 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> EditComment(Guid id)
         {
-            var model = await _commentService.EditComment(id);
-            return View(model);
+            try
+            {
+                var model = await _commentService.EditComment(id);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось получить комментарий по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Comment");
+            }
         }
 
         /// <summary>
@@ -89,9 +98,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [Route("Remove")]
         public async Task<IActionResult> RemoveComment(Guid id, bool confirm = true)
         {
-            if (confirm)
-                await RemoveComment(id);
-            return RedirectToAction("Get", "Comment");
+            try
+            {
+                if (confirm)
+                    await RemoveComment(id);
+                return RedirectToAction("Get", "Comment");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось удалить комментарий по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Comment");
+            }
         }
 
         /// <summary>

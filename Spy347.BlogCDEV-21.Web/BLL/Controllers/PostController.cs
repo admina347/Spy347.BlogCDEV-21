@@ -38,8 +38,17 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowPost(Guid id)
         {
-            var post = await _postService.ShowPost(id);
-            return View(post);
+            try
+            {
+                var post = await _postService.ShowPost(id);
+                return View(post);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось получить статью по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Post");
+            }
         }
 
         /// <summary>
@@ -84,9 +93,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> EditPost(Guid id)
         {
-            var model = await _postService.EditPost(id);
-
-            return View(model);
+            try
+            {
+                var model = await _postService.EditPost(id);
+    
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось получить статью по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Post");
+            }
         }
 
         /// <summary>
@@ -115,9 +133,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [Route("Remove")]
         public async Task<IActionResult> RemovePost(Guid id, bool confirm = true)
         {
-            if (confirm)
-                await RemovePost(id);
-            return RedirectToAction("Get", "Post");
+            try
+            {
+                if (confirm)
+                    await RemovePost(id);
+                return RedirectToAction("Get", "Post");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось удалить статью по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Post");
+            }
         }
 
         /// <summary>
@@ -127,9 +154,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [Route("Remove")]
         public async Task<IActionResult> RemovePost(Guid id)
         {
-            await _postService.RemovePost(id);
-            _logger.LogDebug($"Удалена статья - {id}");
-            return RedirectToAction("Get", "Post");
+            try
+            {
+                await _postService.RemovePost(id);  //Почему-то не вознивает ошибка если нет id, потом что есть проверка в методе удаления
+                _logger.LogDebug($"Удалена статья - {id}");
+                return RedirectToAction("Get", "Post");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось удалить статью по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Post");
+            }
         }
 
         /// <summary>

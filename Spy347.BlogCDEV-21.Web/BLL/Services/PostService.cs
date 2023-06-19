@@ -112,7 +112,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             {
                 foreach (var tag in model.Tags)
                 {
-                    var tagChanged = _tagRepository.GetTag(tag.Id);
+                    var tagChanged = await _tagRepository.GetTag(tag.Id);
                     if (tag.IsSelected)
                     {
                         post.Tags.Add(tagChanged);

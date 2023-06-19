@@ -142,8 +142,17 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> EditAccount(Guid id)
         {
-            var model = await _accountService.EditAccount(id);
-            return View(model);
+            try
+            {
+                var model = await _accountService.EditAccount(id);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось получить пользователя по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Account");
+            }
         }
 
         /// <summary>
@@ -176,9 +185,18 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveAccount(Guid id, bool confirm = true)
         {
-            if (confirm)
-                await RemoveAccount(id);
-            return RedirectToAction("Get", "Account");
+            try
+            {
+                if (confirm)
+                    await RemoveAccount(id);
+                return RedirectToAction("Get", "Account");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Ошибка: {ex}");
+                _logger.LogError($"Ошибка: не удалось удалить пользователя по id - {id} for more information see information log.");
+                return RedirectToAction("Get", "Account");
+            }
         }
 
         /// <summary>
