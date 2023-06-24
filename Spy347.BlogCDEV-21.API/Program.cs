@@ -18,6 +18,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/* builder.Services.AddSwaggerGen(c =>
+            {
+                var filepath = Path.Combine(AppContext.BaseDirectory, "Spuy347.BlogCDEV-21.API.xml");
+                c.IncludeXmlComments(filepath);
+            }); */
+
+
 //Identity password settings
 builder.Services.AddIdentity<User, Role>(opts =>
 {
