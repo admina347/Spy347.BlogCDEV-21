@@ -1,0 +1,17 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Spy347.BlogCDEV_21.API
+build_property.RootNamespace = Spy347.BlogCDEV_21.API
+build_property.ProjectDir = /home/admina/Документы/C-sharp курс/Итоговый проект БЛОГ/Spy347.BlogCDEV-21/Spy347.BlogCDEV-21.API/
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/admina/Документы/C-sharp курс/Итоговый проект БЛОГ/Spy347.BlogCDEV-21/Spy347.BlogCDEV-21.API
+build_property._RazorSourceGeneratorDebug = 

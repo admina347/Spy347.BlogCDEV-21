@@ -26,7 +26,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/admina/Документы/C-sharp курс/Итоговый проект БЛОГ/Spy347.BlogCDEV-21/Spy347.BlogCDEV-21.Infrastructure/Spy347.BlogCDEV-21.Infrastructure.csproj": {
+                "projectPath": "/home/admina/Документы/C-sharp курс/Итоговый проект БЛОГ/Spy347.BlogCDEV-21/Spy347.BlogCDEV-21.Infrastructure/Spy347.BlogCDEV-21.Infrastructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -39,11 +43,23 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.7, )"
             },
             "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
               "version": "[6.5.0, )"
             }
@@ -63,6 +79,69 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.304/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/admina/Документы/C-sharp курс/Итоговый проект БЛОГ/Spy347.BlogCDEV-21/Spy347.BlogCDEV-21.Infrastructure/Spy347.BlogCDEV-21.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/admina/Документы/C-sharp курс/Итоговый проект БЛОГ/Spy347.BlogCDEV-21/Spy347.BlogCDEV-21.Infrastructure/Spy347.BlogCDEV-21.Infrastructure.csproj",
+        "projectName": "Spy347.BlogCDEV-21.Infrastructure",
+        "projectPath": "/home/admina/Документы/C-sharp курс/Итоговый проект БЛОГ/Spy347.BlogCDEV-21/Spy347.BlogCDEV-21.Infrastructure/Spy347.BlogCDEV-21.Infrastructure.csproj",
+        "packagesPath": "/home/admina/.nuget/packages/",
+        "outputPath": "/home/admina/Документы/C-sharp курс/Итоговый проект БЛОГ/Spy347.BlogCDEV-21/Spy347.BlogCDEV-21.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/admina/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
