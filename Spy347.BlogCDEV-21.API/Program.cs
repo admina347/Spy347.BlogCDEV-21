@@ -16,7 +16,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+//
+//builder.Services.AddMvc(c => c.Conventions.Add(new ApiExplorerIgnores()));
+
 builder.Services.AddSwaggerGen();
+
+/* builder.Services.AddSwaggerGen(c => {
+    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+    c.IgnoreObsoleteActions();
+    c.IgnoreObsoleteProperties();
+    c.CustomSchemaIds(type => type.FullName);
+}); */
+
 
 /* builder.Services.AddSwaggerGen(c =>
             {
@@ -83,6 +94,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
