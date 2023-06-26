@@ -73,6 +73,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         public async Task<SignInResult> Login(LoginViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
+            //если не найден юзер будет ошибка!
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
             return result;
         }

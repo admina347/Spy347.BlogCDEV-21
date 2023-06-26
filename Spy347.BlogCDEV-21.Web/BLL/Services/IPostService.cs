@@ -7,8 +7,10 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
     {
         Task<PostViewModel> CreatePost();
         Task<Guid> CreatePost(PostViewModel model);
+        Task<Guid> CreatePostApi(PostApiViewModel model);
         Task<PostViewModel> EditPost(Guid id);
         Task EditPost(PostViewModel model, Guid id);
+        Task EditPostApi(PostApiViewModel model, Guid id);
         Task<List<Post>> GetPosts();
         Task RemovePost(Guid id);
         Task<PostViewModel> ShowPost(Guid id);

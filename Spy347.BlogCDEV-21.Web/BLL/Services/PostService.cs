@@ -71,6 +71,36 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return post.Id;
         }
 
+        //
+        public async Task<Guid> CreatePostApi(PostApiViewModel model)
+        {
+            /* var dbTags = new List<Tag>();
+
+            if (model.Tags != null)
+            {
+                var postTags = model.Tags.Where(t => t.IsSelected == true).ToList();
+                var tagsId = postTags.Select(t => t.Id).ToList();
+                dbTags = _tagRepository.GetAllTags().Where(t => tagsId.Contains(t.Id)).ToList();
+            } */
+
+            Post post = new Post
+            {
+                Id = model.Id,
+                Title = model.Title,
+                Text = model.Text,
+                //Tags = dbTags,
+                AuthorId = model.AuthorId
+            };
+
+            var user = await _userManager.FindByIdAsync(model.AuthorId);
+            user.Posts.Add(post);
+
+            await _postRepository.AddPost(post);
+            await _userManager.UpdateAsync(user);
+
+            return post.Id;
+        }
+
         public async Task<PostViewModel> EditPost(Guid id)
         {
             var post = _postRepository.GetPost(id);
@@ -126,6 +156,34 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
 
             await _postRepository.UpdatePost(post);
         }
+        //
+        public async Task EditPostApi(PostApiViewModel model, Guid id)
+        {
+            var post = _postRepository.GetPost(id);
+
+            post.Title = model.Title;
+            post.Text = model.Text;
+
+            /* //Если есть теги
+            if (model.Tags is not null)
+            {
+                foreach (var tag in model.Tags)
+                {
+                    var tagChanged = await _tagRepository.GetTag(tag.Id);
+                    if (tag.IsSelected)
+                    {
+                        post.Tags.Add(tagChanged);
+                    }
+                    else
+                    {
+                        post.Tags.Remove(tagChanged);
+                    }
+                }
+            } */
+
+            await _postRepository.UpdatePost(post);
+        }
+
 
         public async Task RemovePost(Guid id)
         {
