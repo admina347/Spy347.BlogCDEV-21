@@ -8,6 +8,7 @@ using Spy347.BlogCDEV_21.Web.ViewModels.Account;
 
 namespace Spy347.BlogCDEV_21.Web.Controllers;
 
+//[Route("[controller]")]
 public class HomeController : Controller
 {
     private readonly UserManager<User> _userManager;
@@ -26,7 +27,7 @@ public class HomeController : Controller
         _mapper = mapper;
         _logger = logger;
     }
-
+    
     public async Task<IActionResult> Index()
     {
         await _homeService.GenerateData();
@@ -40,12 +41,12 @@ public class HomeController : Controller
         return View();
     }
 
+
     public IActionResult Privacy()
     {
         return View();
     }
 
-    [Route("Home/Error")]
     public IActionResult Error(int? statusCode = null)
     {
         if (statusCode.HasValue)

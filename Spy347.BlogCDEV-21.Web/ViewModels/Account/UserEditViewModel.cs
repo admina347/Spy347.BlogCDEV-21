@@ -27,6 +27,8 @@ namespace Spy347.BlogCDEV_21.Web.ViewModels.Account
         [Display(Name = "Роли")]
         //public List<IdentiryRole> Roles { get; set; }
 
+        public IEnumerable<Guid> Posts { get; set; }
+        
         public List<RoleViewModel> Roles { get; set; }
         public IList<string> UserRoles { get; set; }
         public UserEditViewModel()
