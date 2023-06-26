@@ -163,6 +163,37 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             return result;
         }
 
+        //
+        public async Task<IdentityResult> EditAccountApi(UserApiEditViewModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.Id.ToString());
+
+            if (model.FirstName != null)
+            {
+                user.FirstName = model.FirstName;
+            }
+            if (model.LastName != null)
+            {
+                user.LastName = model.LastName;
+            }
+            if (model.Email != null)
+            {
+                user.Email = model.Email;
+            }
+            if (model.NewPassword != null)
+            {
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.NewPassword);
+            }
+            if (model.UserName != null)
+            {
+                user.UserName = model.UserName;
+            }
+
+
+            var result = await _userManager.UpdateAsync(user);
+            return result;
+        }
+
         public async Task RemoveAccount(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());

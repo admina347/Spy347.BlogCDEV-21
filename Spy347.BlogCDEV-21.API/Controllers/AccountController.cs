@@ -114,9 +114,9 @@ namespace Spy347.BlogCDEV_21.API.Controllers
         [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditUser")]
-        public async Task<IActionResult> EditUser(UserEditViewModel request)
+        public async Task<IActionResult> EditUser(UserApiEditViewModel request)
         {
-            var result = await _accountService.EditAccount(request);
+            var result = await _accountService.EditAccountApi(request);
 
             if (result.Succeeded)
                 return StatusCode(201);

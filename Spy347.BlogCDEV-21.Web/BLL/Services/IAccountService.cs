@@ -8,6 +8,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
     {
         Task<UserEditViewModel> EditAccount(Guid id);
         Task<IdentityResult> EditAccount(UserEditViewModel model);
+        Task<IdentityResult> EditAccountApi(UserApiEditViewModel model);
         Task<List<User>> GetAccounts();
         Task<SignInResult> Login(LoginViewModel model);
         Task LogoutAccount();
