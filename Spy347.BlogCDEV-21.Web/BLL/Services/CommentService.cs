@@ -77,6 +77,21 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
             await _commentRepository.UpdateComment(comment);
         }
 
+        public async Task<int> EditCommentApi(CommentViewModel model)
+        {
+            var comment = _commentRepository.GetComment(model.Id);
+
+            if (comment == null)
+                return 0;
+
+            comment.Text = model.Text;
+            comment.AuthorEmail = model.AuthorEmail;
+
+            await _commentRepository.UpdateComment(comment);
+            return 1;
+        }
+
+
         public async Task RemoveComment(Guid id)
         {
             await _commentRepository.RemoveComment(id);

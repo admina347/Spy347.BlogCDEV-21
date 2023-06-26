@@ -18,6 +18,12 @@ namespace Spy347.BlogCDEV_21.Infrastructure.Repositories
             return _context.Tags.Include(p => p.Posts).ToHashSet();
         }
 
+        public HashSet<Tag> GetAllTagsApi()
+        {
+            return _context.Tags.ToHashSet();
+        }
+
+
         public async Task<Tag> GetTag(Guid id)
         {
             return await _context.Tags.FirstOrDefaultAsync(t => t.Id == id);

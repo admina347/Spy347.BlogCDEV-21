@@ -9,6 +9,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         Task EditTag(TagViewModel model);
         Task<TagViewModel> EditTag(Guid id);
         Task<List<Tag>> GetTags();
+        Task<List<Tag>> GetTagsApi();
         Task RemoveTag(Guid id);
     }
 }

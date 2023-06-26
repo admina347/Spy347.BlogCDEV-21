@@ -61,5 +61,10 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Services
         {
             return _tagRepository.GetAllTags().ToList();
         }
+
+        public async Task<List<Tag>> GetTagsApi()
+        {
+            return _tagRepository.GetAllTagsApi().ToList();
+        }
     }
 }
