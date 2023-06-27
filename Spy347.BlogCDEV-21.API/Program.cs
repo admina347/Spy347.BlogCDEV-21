@@ -31,6 +31,8 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger API", Version = "v1" });
     c.DocumentFilter<SwaggerDocumentFilter>();
+    var filepath = Path.Combine(AppContext.BaseDirectory, "Spy347.BlogCDEV-21.API.xml");
+    c.IncludeXmlComments(filepath);
 });
 
 /* builder.Services.AddSwaggerGen(c => {

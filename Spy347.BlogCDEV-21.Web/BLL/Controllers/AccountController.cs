@@ -1,3 +1,4 @@
+using System.Net;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +36,14 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(401);
+            }
         }
 
         /// <summary>
@@ -169,7 +177,7 @@ namespace Spy347.BlogCDEV_21.Web.BLL.Controllers
             {
                 _logger.LogDebug($"Аккаунт - {model.UserName} был изменен");
                 return RedirectToAction("Get", "Account");
-            }    
+            }
             else
             {
                 ModelState.AddModelError("", $"{result.Errors.First().Description}");

@@ -81,6 +81,19 @@ namespace Spy347.BlogCDEV_21.API.Controllers
         }
 
         /// <summary>
+        /// Выхода из аккаунта
+        /// </summary>
+        [Route("Logout")]
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> LogoutAccount()
+        {
+            await _accountService.LogoutAccount();
+            return StatusCode(200);
+        }
+
+
+        /// <summary>
         /// Получение всех пользователей
         /// </summary>
         [Authorize(Roles = "Администратор")]
